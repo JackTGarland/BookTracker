@@ -1,0 +1,38 @@
+I want to create an android application, it will be used to store data about books.
+The App should have a search box at the top of the screen where a user can input a title, author or ISBN number, it should then search through https://openlibrary.org/ for the item.
+The information returned should be the book cover, title, and author.
+Selecting the book should then give an option to mark the book as owned, a text field to enter the page number currently on, and another tick box to select that the user has finished reading the book.
+The data entered for the book by the user should be stored locally. 
+
+Overview
+Bookshelf, recently searched books (Uses index column from DB).
+Bottom 3 tabs.
+1 search, 2 homepage, 3 Gamify (Under construction)
+Select a book, openes the detailed page containing, title, auther, shot descption, option to mark as owned, option to enter page number, option to mark as want to read.
+Filters at the top of the homepage.
+1, books owned.
+2, books with a page number entered.
+3, books marked want to read.
+
+Pages
+-Homepage
+-Search page.
+-Detailed page.
+-Under construction page.
+
+
+SQL database
+
+tables
+-Searches
+--ID, date&time, search term.
+-books
+--ISBN(PK), name, auther, bookCover.png, shot description, owned?, wantToRead?, pagenumber, read?, compleationDate, index(max 20) 
+
+index is used to order the books on the homepage, once a book is selected it is added to the DB and given index 1 and all others are X+1 while item 31 is made null.
+
+Infomration will be gathered from open libary API 
+
+Date & Time is usead to display the last 5 searches made when searching. 
+
+Nice to have.

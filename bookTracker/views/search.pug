@@ -1,0 +1,32 @@
+extends layout
+
+block content
+  h1 Search Books
+  form(id="searchForm", action="/search", method="POST")
+    input(type="text", id="searchInput", name="q", placeholder="Enter search term")
+    button(type="submit") Search
+
+  // Dropdown for last three searches
+  select(id="lastSearches", name="lastSearches")
+    option(value="") --Select a previous search--
+
+  script.
+    // JavaScript code to populate the dropdown with last three searches
+    async function fetchLastSearches() {
+      try {
+        const response = await fetch('/search/last');
+        const data = await response.json();
+        const dropdown = document.getElementById('lastSearches');
+        dropdown.innerHTML = '<option value="">--Select a previous search--</option>';
+        data.searches.forEach(search => {
+          dropdown.innerHTML += `<option value="${search.term}">${search.term}</option>`;
+        });
+      } catch (error) {
+        console.error('Error fetching last searches:', error);
+      }
+    }
+
+    // Populate the dropdown when the search input is focused
+    document.getElementById('searchInput').addEventListener('focus', function() {
+      fetchLastSearches();
+    });
